@@ -19,7 +19,9 @@ addBtn.addEventListener('click', function (e) {
 	const newNote = {
 		id: uuidv4(),
 		title: 'Unnamed note',
-		text: ''
+		text: '',
+		createdAt: moment().valueOf(),
+		updatedAt: moment().valueOf(),
 	}
 	notes.push(newNote)
 	saveNotes(notes)

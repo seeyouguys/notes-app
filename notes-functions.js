@@ -1,7 +1,7 @@
 // Get notes from localStorage
 const getNotes = function () {
 	const notesJSON = localStorage.getItem('notesJSON')
-	return JSON.parse(notesJSON) || [{id: uuidv4(), title: 'Hello!', text: 'It is a sample note, try to create another one!'}]
+	return JSON.parse(notesJSON) || [{ id: uuidv4(), title: 'Hello!', text: 'It is a sample note, try to create another one!', createdAt: moment().valueOf(), updatedAt: moment().valueOf()}]
 }
 
 // Save notes to localStorage
@@ -29,6 +29,7 @@ const generateNoteDOM = function (note) {
 	titleEl.textContent = note.title
 	
 	rowWrapperHeader.appendChild(titleEl)
+	
 		// Edit
 	const editEl = document.createElement('div')
 	editEl.classList.add('col-sm-1')
@@ -42,18 +43,27 @@ const generateNoteDOM = function (note) {
 	removeEl.appendChild(generateRemoveBtn(note))
 	rowWrapperHeader.appendChild(removeEl)
 
-	// Note Body (optional)
-	if (note.text !== ''){
-		const noteBody = document.createElement('div')
-		noteBody.classList.add('card-body')
-		const rowWrapperBody = document.createElement('div')
-		rowWrapperBody.classList.add('row')
-		noteBody.textContent = note.text
-		
-		noteBody.appendChild(rowWrapperBody)
-		noteRoot.appendChild(noteBody)
-	}
+	// Note Body
+	const noteBody = document.createElement('div')
+	noteBody.classList.add('card-body')
+	const rowWrapperBody = document.createElement('div')
+	rowWrapperBody.classList.add('row')
+	
 
+		// Note text
+	noteBody.textContent = note.text
+	
+	
+		// Time
+	const timeEl = document.createElement('small')
+	timeEl.classList.add('text-muted', 'col-sm-12', 'offset-sm-12')
+	timeEl.textContent = `Updated ${moment(note.updatedAt).fromNow()}`
+
+	noteBody.appendChild(rowWrapperBody)
+	noteRoot.appendChild(noteBody)
+	rowWrapperBody.appendChild(timeEl)
+
+	
 	return noteRoot
 }
 
