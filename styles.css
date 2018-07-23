@@ -1,0 +1,28 @@
+body {
+	padding: 40px;
+}
+
+.note {
+	min-width: 100%;
+	margin-bottom: 10px;
+}
+
+#notes-container {
+	min-width: 100%;
+}
+
+.cute-bg {
+	background: url(img/bg.png) 0 100%;
+	background-color:rgb(82, 116, 187);
+
+}
+
+.cute-bg h1 {
+	color: rgb(255, 255, 255);
+	font-weight: 700;
+}
+
+.container h1 {
+	padding: 0;
+	margin: 0;
+}
