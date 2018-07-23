@@ -37,6 +37,7 @@ const editNote = function (id, title, text) {
 	const note = getNote(id)
 	note.title = title || 'Unnamed note'
 	note.text = text || ''
+	note.updatedAt = moment().valueOf()
 }
 
 	// SAVE BUTTON
