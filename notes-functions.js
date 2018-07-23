@@ -122,7 +122,7 @@ const generateEditBtn = function (target) {
 	// Redirect to the edit page on click
 	btn.addEventListener('click', function (e) {
 		saveNotes(notes)
-		location.assign(`/edit.html#${target.id}`)
+		location.assign(`edit.html#${target.id}`)
 	})
 	return btn
 }
