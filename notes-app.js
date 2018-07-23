@@ -23,7 +23,7 @@ addBtn.addEventListener('click', function (e) {
 	}
 	notes.push(newNote)
 	saveNotes(notes)
-	location.assign(`/edit.html#${newNote.id}`)
+	location.assign(`edit.html#${newNote.id}`)
 })
 // Recolor the add button on hover
 onHover(addBtn, 'btn-primary')
