@@ -21,7 +21,7 @@ addBtn.addEventListener('click', function (e) {
 		title: 'Unnamed note',
 		text: '',
 		createdAt: moment().valueOf(),
-		updatedAt: moment().valueOf(),
+		updatedAt: null,
 	}
 	notes.push(newNote)
 	saveNotes(notes)

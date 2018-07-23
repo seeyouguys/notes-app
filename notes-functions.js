@@ -55,16 +55,29 @@ const generateNoteDOM = function (note) {
 	
 	
 		// Time
-	const timeEl = document.createElement('small')
-	timeEl.classList.add('text-muted', 'col-sm-12', 'offset-sm-12')
-	timeEl.textContent = `Updated ${moment(note.updatedAt).fromNow()}`
+	const timeEl = generateLastEditCaption(note)
 
+	
 	noteBody.appendChild(rowWrapperBody)
 	noteRoot.appendChild(noteBody)
 	rowWrapperBody.appendChild(timeEl)
 
 	
 	return noteRoot
+}
+
+// 
+const generateLastEditCaption = function (note) {
+	const caption = document.createElement('small')
+	caption.classList.add('text-muted', 'col-sm-12', 'offset-sm-12')
+
+	if (note.updatedAt !== null) {
+		caption.textContent = `Updated ${moment(note.updatedAt).fromNow()}`
+	} else {
+		caption.textContent = `Created ${moment(note.createdAt).fromNow()}`
+	}
+
+	return caption
 }
 
 // Render the notes via filters
