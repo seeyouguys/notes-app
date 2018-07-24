@@ -103,7 +103,15 @@ const sortBy = function (notes, way) {
 			}
 		})
 	} else if (way === 'alphabetical') {
-
+		return notes.sort(function (a, b) {
+			if (a.title.toLowerCase() > b.title.toLowerCase()) {
+				return 1
+			} else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+				return -1
+			} else {
+				return 0
+			}
+		})
 	}
 }
 
@@ -119,7 +127,7 @@ const renderNotes = function (notes, filters) {
 		return searchTitleMatch
 	})
 
-	// Render the notes
+	// Sort the notes and render it
 	sortBy(notes, filters.sortBy).forEach(function (note) {
 		notesContainer.appendChild(generateNoteDOM(note))
 	})
