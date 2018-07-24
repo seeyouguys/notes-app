@@ -1,8 +1,6 @@
 // Get notes from localStorage
-const getNotes = function () {
-	const notesJSON = localStorage.getItem('notesJSON')
-	return JSON.parse(notesJSON) || [{ id: uuidv4(), title: 'Hello!', text: 'It is a sample note, try to create another one!', createdAt: moment().valueOf(), updatedAt: moment().valueOf()}]
-}
+const getNotes = () => JSON.parse(localStorage.getItem('notesJSON')) || [{ id: uuidv4(), title: 'Hello!', text: 'It is a sample note, try to create another one!', createdAt: moment().valueOf(), updatedAt: moment().valueOf()}]
+
 
 // Save notes to localStorage
 const saveNotes = (notes) => localStorage.setItem('notesJSON', JSON.stringify(notes))
@@ -120,16 +118,11 @@ const renderNotes = function (notes, filters) {
 	const notesContainer = document.querySelector('#notes-container')
 	notesContainer.innerHTML = ''
 
-	const filteredNotes = notes.filter(function (note) {
-		const searchTitleMatch = note.title.toLowerCase().includes(filters.searchTitle.toLowerCase())
+	// Filter the notes
+	const filteredNotes = notes.filter(note => note.title.toLowerCase().includes(filters.searchTitle.toLowerCase()))
 
-		return searchTitleMatch
-	})
-
-	// Sort the notes and render it
-	sortBy(filteredNotes, filters.sortBy).forEach(function (note) {
-		notesContainer.appendChild(generateNoteDOM(note))
-	})
+	// Sort the filtered notes and render it
+	sortBy(filteredNotes, filters.sortBy).forEach(note => notesContainer.appendChild(generateNoteDOM(note)))
 }
 
 // Create the DOM element for a remove btn and add some functionality to it
@@ -160,12 +153,8 @@ const removeNote = function (id) {
 	}
 }
 
-// Find note by ID
-const getNote = function (id) {
-	return notes.find(function (note) {
-		return note.id === id
-	})	
-}
+// Find and return note by ID
+const getNote = id => notes.find(note => note.id === id)
 
 // Create the DOM element for an edit btn and add some functionality to it
 const generateEditBtn = function (target) {
