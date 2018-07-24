@@ -69,7 +69,7 @@ const generateNoteDOM = function (note) {
 // 
 const generateLastEditCaption = function (note) {
 	const caption = document.createElement('small')
-	caption.classList.add('text-muted', 'col-sm-12', 'offset-sm-12')
+	caption.classList.add('text-muted', 'col-sm-12')
 
 	if (note.updatedAt !== null) {
 		caption.textContent = `Updated ${moment(note.updatedAt).fromNow()}`
