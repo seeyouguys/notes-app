@@ -5,9 +5,8 @@ const getNotes = function () {
 }
 
 // Save notes to localStorage
-const saveNotes = function (notes) {
-	localStorage.setItem('notesJSON', JSON.stringify(notes))
-}
+const saveNotes = (notes) => localStorage.setItem('notesJSON', JSON.stringify(notes))
+
 
 // Create DOM element for a single note
 const generateNoteDOM = function (note) {
@@ -128,7 +127,7 @@ const renderNotes = function (notes, filters) {
 	})
 
 	// Sort the notes and render it
-	sortBy(notes, filters.sortBy).forEach(function (note) {
+	sortBy(filteredNotes, filters.sortBy).forEach(function (note) {
 		notesContainer.appendChild(generateNoteDOM(note))
 	})
 }
