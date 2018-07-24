@@ -2,7 +2,7 @@ let notes = getNotes()
 
 const filters = {
 	searchTitle: '',
-	sortBy: document.querySelector('#sortBy').value
+	sortBy: 'byLastEdited'
 }
 
 renderNotes(notes, filters)
