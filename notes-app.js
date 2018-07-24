@@ -16,12 +16,13 @@ document.querySelector('#searchField').addEventListener('input', function (e) {
 // Add new note btn handler
 const addBtn = document.querySelector('#addNote')
 addBtn.addEventListener('click', function (e) {
+	const timestamp = moment().valueOf()
 	const newNote = {
 		id: uuidv4(),
 		title: 'Unnamed note',
 		text: '',
-		createdAt: moment().valueOf(),
-		updatedAt: null,
+		createdAt: timestamp,
+		updatedAt: timestamp,
 	}
 	notes.push(newNote)
 	saveNotes(notes)

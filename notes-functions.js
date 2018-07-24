@@ -71,7 +71,7 @@ const generateLastEditCaption = function (note) {
 	const caption = document.createElement('small')
 	caption.classList.add('text-muted', 'col-sm-12')
 
-	if (note.updatedAt !== null) {
+	if (note.updatedAt !== note.createdAt) {
 		caption.textContent = `Updated ${moment(note.updatedAt).fromNow()}`
 	} else {
 		caption.textContent = `Created ${moment(note.createdAt).fromNow()}`
@@ -79,6 +79,34 @@ const generateLastEditCaption = function (note) {
 
 	return caption
 }
+
+// Sort notes order with one of three ways
+const sortBy = function (notes, way) {
+	if (way === 'byDate') {
+		return notes.sort(function (a, b) {
+			if (a.createdAt < b.createdAt) {
+				return 1
+			} else if (a.createdAt > b.createdAt) {
+				return -1
+			} else {
+				return 0
+			}
+		})
+	} else if (way === 'byLastEdited') {
+		return notes.sort(function (a, b) {
+			if (a.updatedAt < b.updatedAt) {
+				return 1
+			} else if (a.updatedAt > b.updatedAt) {
+				return -1
+			} else {
+				return 0
+			}
+		})
+	} else if (way === 'alphabetical') {
+
+	}
+}
+
 
 // Render the notes via filters
 const renderNotes = function (notes, filters) {
@@ -91,11 +119,10 @@ const renderNotes = function (notes, filters) {
 		return searchTitleMatch
 	})
 
-	// Render the notes in reverse order
-	for (let i = filteredNotes.length-1; i >= 0; i--) {
-		const note = filteredNotes[i]
+	// Render the notes
+	sortBy(notes, filters.sortBy).forEach(function (note) {
 		notesContainer.appendChild(generateNoteDOM(note))
-	}
+	})
 }
 
 // Create the DOM element for a remove btn and add some functionality to it
